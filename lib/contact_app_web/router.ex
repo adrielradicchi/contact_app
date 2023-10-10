@@ -7,6 +7,8 @@ defmodule ContactAppWeb.Router do
 
   scope "/api", ContactAppWeb do
     pipe_through :api
+
+    resources "/contacts", ContactController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
