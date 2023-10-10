@@ -11,6 +11,8 @@ defmodule ContactAppWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  plug PromEx.Plug, prom_ex_module: ContractApp.PromEx
+
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.

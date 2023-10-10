@@ -17,9 +17,10 @@ defmodule ContactApp.Application do
       # Start Finch
       {Finch, name: ContactApp.Finch},
       # Start the Endpoint (http/https)
-      ContactAppWeb.Endpoint
+      ContactAppWeb.Endpoint,
       # Start a worker by calling: ContactApp.Worker.start_link(arg)
       # {ContactApp.Worker, arg}
+      ContractApp.PromEx
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
