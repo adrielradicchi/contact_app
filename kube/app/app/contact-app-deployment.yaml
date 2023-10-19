@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-app
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contact-app
+  template:
+    metadata:
+      name: contact-app
+      labels:
+        app: contact-app
+    spec:
+      containers:
+      - name: contact-app
+        image: adrielradicchi/contact-app:elixir-1.0
+        ports:
+        - name: contact-app
+          containerPort: 4000
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+

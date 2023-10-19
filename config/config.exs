@@ -41,6 +41,19 @@ config :phoenix, :json_library, Jason
 config :contact_app, ContactApp.PromEx,
   manual_metrics_start_delay: :no_delay
 
+config :libcluster,
+  topologies: [
+    erlang_nodes_in_k8s: [
+      strategy: Elixir.Cluster.Strategy.Kubernetes,
+      config: [
+        mode: :ip,
+        kubernetes_node_basename: "contact-app",
+        kubernetes_selector: "app=contact-app",
+        kubernetes_namespace: "contact-app",
+        polling_interval: 10_000
+      ]
+    ]
+  ]
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

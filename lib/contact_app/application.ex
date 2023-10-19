@@ -7,6 +7,9 @@ defmodule ContactApp.Application do
 
   @impl true
   def start(_type, _args) do
+
+    topologies = Application.get_env(:libcluster, :topologies) || []
+
     children = [
       # Start the Telemetry supervisor
       ContactAppWeb.Telemetry,
@@ -20,7 +23,9 @@ defmodule ContactApp.Application do
       ContactAppWeb.Endpoint,
       # Start a worker by calling: ContactApp.Worker.start_link(arg)
       # {ContactApp.Worker, arg}
-      ContractApp.PromEx
+      ContractApp.PromEx,
+
+      {Cluster.Supervisor, [topologies, [name: ContactApp.ClusterSupervisor]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
